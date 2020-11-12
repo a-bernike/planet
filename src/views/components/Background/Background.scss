@@ -1,0 +1,41 @@
+@import './src/styles/variables';
+
+@function multiple-box-shadow ($n){
+    $value:'#{random(3000)-1000}px #{random(3000)-1000}px #fff';
+    @for $i from 2 through $n{
+        $value:'#{$value} , #{random(3000)-1000}px #{random(3000)-1000}px #fff'
+    }
+    @return unquote($value);
+}
+$shadows-small:  multiple-box-shadow(2000);
+$shadows-medium: multiple-box-shadow(1000);
+$shadows-big:    multiple-box-shadow(300);
+
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    .star {
+        background: $white;
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        &-md {
+            width: 2px;
+            height: 2px;
+            box-shadow: $shadows-medium;
+        }
+        &-sm {
+            width: 1px;
+            height: 1px;
+            box-shadow: $shadows-small;
+        }
+        &-lg {
+            box-shadow: $shadows-big;
+        }
+    }
+}
