@@ -1,4 +1,4 @@
-REACT_APP_PROTOCOL=http
-REACT_APP_HOST=localhost:3000
-REACT_APP_ASSET_HOST=http://localhost:3000/assets
+REACT_APP_PROTOCOL=https
+REACT_APP_HOST=https://jovial-minsky-7e6547.netlify.app
+REACT_APP_ASSET_HOST=https://jovial-minsky-7e6547.netlify.app/assets
 REACT_APP_API_URL=https://swapi.dev/api/
