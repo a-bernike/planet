@@ -4,7 +4,7 @@ import { setResetList, setSelectedPlanet } from 'store/action/dashboard';
 import './List.scss';
 import InfiniteScroll from 'react-infinite-scroller';
 import { getPlanets, getPlanetDetail } from 'services/Planet';
-import { Loader } from 'views/components/widgets';
+import { Loader, TextInput } from 'views/components/widgets';
 import Empty from './Empty';
 import Tile from './Tile';
 
@@ -16,6 +16,7 @@ const List = props => {
     const [data, setData] = useState([]);
     const [listStatus, setListStatus] = useState({loading: false, end: false});
     const [loading, setLoading] = useState(false);
+    const [name, setName] = useState("");
 
     useEffect(() => {
         if (resetList) {
@@ -46,6 +47,14 @@ const List = props => {
         })
     }
 
+    const nameKeyUp = (e) => {
+        if (e.which === 13) {
+            console.log(name)
+            setListStatus({loading: false, end: true})
+            setData([{name, url: ''}].concat(data))
+        }
+    }
+
     const items = data.map((item, idx) => {
         const splitItemUrl = item.url.split('/');
         const itemId = splitItemUrl[splitItemUrl.length - 2];
@@ -60,6 +69,12 @@ const List = props => {
 
     return (
         <>
+            <TextInput
+                value={name}
+                placeholder="Name..."
+                onChange={(e) => setName(e.target.value)}
+                onKeyUp={nameKeyUp}
+            />
             <div className="list">
                 <InfiniteScroll
                     className="list__wrapper"
